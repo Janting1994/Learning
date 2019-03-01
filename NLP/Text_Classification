@@ -1,0 +1,35 @@
+
+import pandas as pd
+# In[] import data
+train=pd.read_csv('new_data/train_set.csv', sep=',',header=0)
+test=pd.read_csv('new_data/test_set.csv', sep=',',header=0)
+
+# In[]
+train.info()
+test.info()
+# In[]
+train_target=train['class']
+train_matrix=train.drop('class', axis=1)
+# In[]
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(train_matrix, train_target, test_size=0.3, random_state=2019)
+# In[]
+import numpy as np
+label=np.max(train_target)
+print('total-classification is: %d',label)
+article_counts=train['article'].value_counts()
+word_counts=train['word_seg'].value_counts()
+
+# In[]TF-IDF
+#from datetime import datetime 
+from sklearn.feature_extraction.text import TfidfVectorizer
+# set parameters:
+max_df = 0.9 # 在超过这一比例的文档中出现的关键词（过于平凡），去除掉。
+min_df =3 # 在低于这一数量的文档中出现的关键词（过于独特），去除掉。
+count_vect = TfidfVectorizer(max_df = max_df,
+                       min_df = min_df)
+
+train_matrix = pd.DataFrame(count_vect.fit_transform(X_train['word_seg']))
+test_matrix = pd.DataFrame(count_vect.transform(X_test['word_seg']))
+
+
