@@ -1,1 +1,14 @@
+Text Classfication Problem:
+train dataset:
+第一列是文章的索引(id)，
+第二列是文章正文在“字”级别上的表示，即字符相隔正文(article)；
+第三列是在“词”级别上的表示，即词语相隔正文(word_seg)；
+第四列是这篇文章的标注(class)。
+
+test dataset:
+数据格式同train_set.csv，但不包含class。
+
+1、前十有团队建议不用停用词表，因为语气词能表达情感，对class划分有帮助，但忘记link了，，，
+2、article 中的重复出现的语句，最高是重复出现25次，用value.count()统计出来的，暂时不知道怎么用
+
 
