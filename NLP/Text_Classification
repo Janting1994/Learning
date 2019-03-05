@@ -26,10 +26,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # set parameters:
 max_df = 0.9 # 在超过这一比例的文档中出现的关键词（过于平凡），去除掉。
 min_df =3 # 在低于这一数量的文档中出现的关键词（过于独特），去除掉。
-count_vect = TfidfVectorizer(max_df = max_df,
-                       min_df = min_df)
+vect = TfidfVectorizer(ngram_range=(1, 2), min_df=3, max_df=0.9, sublinear_tf=True)
 
-train_matrix = pd.DataFrame(count_vect.fit_transform(X_train['word_seg']))
-test_matrix = pd.DataFrame(count_vect.transform(X_test['word_seg']))
+train_matrix = vect.fit_transform(X_train['word_seg'])
+test_matrix =vect.transform(X_test['word_seg'])
+
+
+# In[]Word2Vec
+
 
 
